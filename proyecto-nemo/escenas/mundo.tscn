@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://6ls3aw75j8hu"]
+
+[ext_resource type="PackedScene" uid="uid://j5rqe0nhurgb" path="res://escenas/jugador/jugador.tscn" id="1_cdbbl"]
+
+[sub_resource type="Gradient" id="Gradient_dayui"]
+offsets = PackedFloat32Array(0, 0.18, 0.4, 0.75333333, 0.9, 1)
+colors = PackedColorArray(0.08235294, 0, 0, 1, 0.15066667, 0.20533334, 0.34, 1, 0.26077837, 0.34064946, 0.5359025, 1, 0.30052763, 0.40956864, 0.67818177, 1, 0.3937724, 0.53664553, 0.88860136, 1, 0.5718024, 0.64276874, 0.855342, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v0a8y"]
+gradient = SubResource("Gradient_dayui")
+width = 24
+height = 24
+fill_from = Vector2(1, 1)
+
+[node name="Mundo" type="Node"]
+
+[node name="FondoEscenario" type="Node2D" parent="."]
+position = Vector2(0, 6)
+
+[node name="TextureRect" type="TextureRect" parent="FondoEscenario"]
+offset_left = -10081.0
+offset_top = -5423.0
+offset_right = 10129.0
+offset_bottom = 5362.0
+texture = SubResource("GradientTexture2D_v0a8y")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="FondoEscenario"]
+
+[node name="ContenedorJugador" type="Node2D" parent="."]
+position = Vector2(0, -1)
+
+[node name="Jugador" parent="ContenedorJugador" instance=ExtResource("1_cdbbl")]
+
+[node name="Camera2D" type="Camera2D" parent="ContenedorJugador/Jugador"]
+limit_left = -10103
+limit_top = -5420
+limit_right = 10103
+limit_bottom = 5329
+limit_smoothed = true
+
+[node name="ContenedorEnemigos" type="Node2D" parent="."]
+
+[node name="ContenedorObjetos" type="Node2D" parent="."]
+
+[node name="FrenteEscenario" type="Node2D" parent="."]
+
+[node name="Interfaz" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContenedorHP" type="HBoxContainer" parent="Interfaz"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
