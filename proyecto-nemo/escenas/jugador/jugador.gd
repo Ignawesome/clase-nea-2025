@@ -6,24 +6,24 @@ extends CharacterBody2D
 # ==============================================================================
 
 # Movimiento
-@export var velocidad_de_movimiento: float = 200.0 # Velocidad horizontal/vertical base
-@export var peso_submarino: float = 8.0            # Fuerza constante que hunde al submarino (gravedad)
+@export var velocidad_de_movimiento: float = 200.0 ## Velocidad horizontal/vertical base
+@export var peso_submarino: float = 8.0            ## Fuerza constante que hunde al submarino (gravedad)
 
 # Ataque
-@export var fuerza_de_ataque := 1.0        # Daño base de los misiles
-@export var velocidad_de_ataque := 1.0     # Frecuencia de disparo (ej: 1.0 por segundo)
-@export var radio_de_ataque: float = 500.0 # Distancia máxima para buscar enemigos
-@export var duración_de_misil: float = 1.0 # Segundos antes de que el misil desaparezca
+@export var fuerza_de_ataque := 1.0        ## Daño base de los misiles
+@export var velocidad_de_ataque := 1.0     ## Frecuencia de disparo (ej: 1.0 por segundo)
+@export var radio_de_ataque: float = 500.0 ## Distancia máxima para buscar enemigos
+@export var duración_de_misil: float = 1.0 ## Segundos antes de que el misil desaparezca
 
 # Defensa
-@export var puntos_de_salud_maximos := 5.0         # Vida máxima del personaje
-@export var probabilidad_de_esquiva: float = 0.05  # Probabilidad de no recibir daño (5%)
+@export var puntos_de_salud_maximos := 5         ## Vida máxima del personaje
+@export var probabilidad_de_esquiva: float = 0.05  ## Probabilidad de no recibir daño (5%)
 
 # ==============================================================================
 # REFERENCIAS Y PRECARGAS
 # ==============================================================================
 
-@onready var timer_misil = $TimerMisil # ¡Debe existir este Timer en la escena!
+@onready var timer_misil: Timer = $TimerMisil # ¡Debe existir este Timer en la escena!
 @onready var sprite: Sprite2D = $Submarino
 
 # Pre-cargamos la escena del misil para poder instanciarla rápidamente
@@ -59,6 +59,13 @@ func _ready():
 	salud_actual = puntos_de_salud_maximos
 	salud_cambiada.emit(salud_actual, puntos_de_salud_maximos)
 	
+	# Registrar al jugador como una variable global
+	Globales.jugador = self
+	
+	# Conectar el timer del ataque
+	timer_misil.timeout.connect(_on_timer_misil_timeout)
+
+
 func _physics_process(_delta) -> void:
 	# 1. Obtener input del jugador
 	var direccion = Vector2.ZERO
@@ -100,6 +107,7 @@ func al_cambiar_de_salud(nueva_salud: float) -> void:
 		derrotado.emit()
 		queue_free()
 
+
 func recibir_danio(cantidad_de_danio: float) -> void:
 	if salud_actual <= 0:
 		return
@@ -137,7 +145,8 @@ func subir_de_nivel() -> void:
 	# Aumentar capacidades (el núcleo del juego!)
 	puntos_de_salud_maximos += 1
 	fuerza_de_ataque += 0.5
-	velocidad_de_ataque += 0.1
+	velocidad_de_ataque *= 0.9
+	timer_misil.wait_time = velocidad_de_ataque
 	probabilidad_de_esquiva = min(probabilidad_de_esquiva + 0.05, 0.5) # Máximo 50% de esquiva
 	
 	# Curar al máximo y emitir señal de nivel subido
@@ -177,7 +186,7 @@ func buscar_enemigo_cercano() -> Enemigo:
 
 # Función para instanciar el proyectil y configurarlo
 func lanzar_misil_a_direccion(direccion_de_disparo: Vector2) -> void:
-	var nuevo_misil: Misil# = Misil.crear_misil(fuerza_de_ataque)
+	var nuevo_misil: Misil = Misil.crear_misil(duración_de_misil, fuerza_de_ataque)
 	
 	# 1. Posicionamiento: Lanzamos el misil desde el centro del jugador
 	get_parent().add_child(nuevo_misil) # Lo añadimos al nodo principal (Mundo)

@@ -12,6 +12,8 @@ extends Area2D
 # VARIABLES Y REFERENCIAS
 # ==============================================================================
 
+const ESCENA_MISIL = preload("uid://beqg12lmsofl8")
+
 # Esta variable debe ser configurada por el Jugador.gd al momento de instanciar
 # el misil. Permite que el daño del misil escale con el nivel del jugador.
 var danio_a_infligir: float = 1.0 
@@ -19,11 +21,20 @@ var direccion: Vector2 = Vector2.RIGHT
 
 @onready var tiempo_de_vida = $TiempoDeVida # Debe ser un nodo Timer hijo
 
+
+# ==============================================================================
+# CONSTRUCTOR
+# ==============================================================================
+
+static func crear_misil(duracion: float, danio: float):
+	var nuevo_misil: Misil = ESCENA_MISIL.instantiate()
+	nuevo_misil.danio_a_infligir = danio
+	nuevo_misil.tiempo_maximo_de_vida = duracion
+	return nuevo_misil
+
 # ==============================================================================
 # FUNCIONES NATIVAS DE GODOT
 # ==============================================================================
-
-#static func crear_misil(duracion, danio, )
 
 func _ready():
 	# 1. Configurar y empezar el temporizador de autodestrucción

@@ -15,6 +15,10 @@ run/main_scene="uid://6ls3aw75j8hu"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="uid://cdaixgkt7585g"
 
+[autoload]
+
+Globales="*res://scripts/globales.gd"
+
 [display]
 
 window/size/viewport_width=1280
@@ -28,6 +32,10 @@ folder_colors={
 "res://recursos/": "yellow",
 "res://scripts/": "purple"
 }
+
+[global_group]
+
+enemigos=""
 
 [input]
 

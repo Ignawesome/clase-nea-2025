@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://6ls3aw75j8hu"]
+[gd_scene load_steps=9 format=3 uid="uid://6ls3aw75j8hu"]
 
 [ext_resource type="PackedScene" uid="uid://j5rqe0nhurgb" path="res://escenas/jugador/jugador.tscn" id="1_cdbbl"]
-[ext_resource type="PackedScene" uid="uid://tnju06m5ruxw" path="res://escenas/interfaz/ranura_corazon.tscn" id="2_6wjgb"]
+[ext_resource type="PackedScene" uid="uid://cynbnmilbcxqd" path="res://escenas/objetos/burbuja.tscn" id="2_6wjgb"]
 [ext_resource type="Script" uid="uid://dx7l18jqwhsm" path="res://scripts/contenedor_enemigos.gd" id="2_glrvs"]
+[ext_resource type="PackedScene" uid="uid://dac85i4tc4afg" path="res://escenas/enemigos/enemigo_medusa.tscn" id="3_16hu1"]
+[ext_resource type="PackedScene" uid="uid://tnju06m5ruxw" path="res://escenas/interfaz/ranura_corazon.tscn" id="4_v12yk"]
 
 [sub_resource type="Gradient" id="Gradient_dayui"]
 offsets = PackedFloat32Array(0, 0.18, 0.4, 0.75333333, 0.9, 1)
@@ -13,6 +15,13 @@ gradient = SubResource("Gradient_dayui")
 width = 24
 height = 24
 fill_from = Vector2(1, 1)
+
+[sub_resource type="GDScript" id="GDScript_16hu1"]
+script/source = "extends Node2D
+
+func _ready() -> void:
+	Globales.contenedor_objetos = self
+"
 
 [node name="Mundo" type="Node"]
 
@@ -25,6 +34,7 @@ offset_top = -5423.0
 offset_right = 10129.0
 offset_bottom = 5362.0
 texture = SubResource("GradientTexture2D_v0a8y")
+metadata/_edit_lock_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="FondoEscenario"]
 
@@ -42,8 +52,185 @@ limit_smoothed = true
 
 [node name="ContenedorEnemigos" type="Node2D" parent="."]
 script = ExtResource("2_glrvs")
+enemigos = Array[PackedScene]([ExtResource("3_16hu1")])
+
+[node name="TimerSpawnEnemigo" type="Timer" parent="ContenedorEnemigos"]
+autostart = true
 
 [node name="ContenedorObjetos" type="Node2D" parent="."]
+
+[node name="ContenedorBurbujas" type="Node2D" parent="ContenedorObjetos"]
+
+[node name="Burbujas" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(-293, 210)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="Burbujas2" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(425, 410)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas2" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas2" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas2" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas2" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="Burbujas3" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(-1477, 699)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas3" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas3" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas3" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas3" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="Burbujas4" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(1757, 640)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas4" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas4" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas4" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas4" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="Burbujas5" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(2608, 766)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas5" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas5" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas5" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas5" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="Burbujas6" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(-2742, 662)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas6" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas6" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas6" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas6" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="Burbujas7" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(-1025, 151)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas7" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas7" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas7" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas7" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="Burbujas8" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(-2350, 62)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas8" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas8" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas8" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas8" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="Burbujas9" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(2941, 232)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas9" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas9" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas9" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas9" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="Burbujas10" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(1357, 180)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas10" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas10" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas10" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas10" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="Burbujas11" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(891, 1120)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas11" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas11" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas11" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas11" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="Burbujas12" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
+position = Vector2(-27, 994)
+
+[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas12" instance=ExtResource("2_6wjgb")]
+position = Vector2(-73, 40)
+
+[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas12" instance=ExtResource("2_6wjgb")]
+position = Vector2(90, -63)
+
+[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas12" instance=ExtResource("2_6wjgb")]
+
+[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas12" instance=ExtResource("2_6wjgb")]
+position = Vector2(-98, -53)
+
+[node name="ContenedorXP" type="Node2D" parent="ContenedorObjetos"]
+script = SubResource("GDScript_16hu1")
 
 [node name="FrenteEscenario" type="Node2D" parent="."]
 
@@ -63,17 +250,17 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="RanuraCorazon" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("2_6wjgb")]
+[node name="RanuraCorazon" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
 layout_mode = 2
 
-[node name="RanuraCorazon2" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("2_6wjgb")]
+[node name="RanuraCorazon2" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
 layout_mode = 2
 
-[node name="RanuraCorazon3" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("2_6wjgb")]
+[node name="RanuraCorazon3" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
 layout_mode = 2
 
-[node name="RanuraCorazon4" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("2_6wjgb")]
+[node name="RanuraCorazon4" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
 layout_mode = 2
 
-[node name="RanuraCorazon5" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("2_6wjgb")]
+[node name="RanuraCorazon5" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
 layout_mode = 2

@@ -85,10 +85,11 @@ func morir():
 		return
 		
 	esta_muerto = true
-	# print("Enemigo derrotado!")
 
 	# 1. Lógica para soltar el OrbeXP (implementar en Sesión 6)
-	# ... Instanciar OrbeXP.tscn ...
+	var nueva_orbe: OrbeExperiencia = OrbeExperiencia.crear_orbe_xp(recompensa_xp)
+	Globales.contenedor_objetos.add_child(nueva_orbe)
+	nueva_orbe.global_position = global_position
 
 	# 2. Eliminar el nodo de la escena
 	queue_free()

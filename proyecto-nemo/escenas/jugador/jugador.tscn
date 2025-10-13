@@ -4,11 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://cdaixgkt7585g" path="res://assets/jugador/submarino.png" id="2_8cmsc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_opouk"]
-radius = 27.0
-height = 156.0
+radius = 17.0
+height = 140.0
 
 [node name="Jugador" type="CharacterBody2D"]
+collision_mask = 28
 script = ExtResource("1_vquro")
+velocidad_de_ataque = 0.17
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 visible = false
@@ -28,3 +30,4 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_opouk")
 
 [node name="TimerMisil" type="Timer" parent="."]
+autostart = true
