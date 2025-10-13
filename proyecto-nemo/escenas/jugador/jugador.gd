@@ -10,12 +10,25 @@ extends CharacterBody2D
 @export var peso_submarino: float = 8.0            # Fuerza constante que hunde al submarino (gravedad)
 
 # Ataque
-@export var fuerza_de_ataque := 1.0                # Daño base de los misiles
-@export var velocidad_de_ataque := 1.0             # Frecuencia de disparo (ej: 1.0 por segundo)
+@export var fuerza_de_ataque := 1.0        # Daño base de los misiles
+@export var velocidad_de_ataque := 1.0     # Frecuencia de disparo (ej: 1.0 por segundo)
+@export var radio_de_ataque: float = 500.0 # Distancia máxima para buscar enemigos
+@export var duración_de_misil: float = 1.0 # Segundos antes de que el misil desaparezca
 
 # Defensa
 @export var puntos_de_salud_maximos := 5.0         # Vida máxima del personaje
 @export var probabilidad_de_esquiva: float = 0.05  # Probabilidad de no recibir daño (5%)
+
+# ==============================================================================
+# REFERENCIAS Y PRECARGAS
+# ==============================================================================
+
+@onready var timer_misil = $TimerMisil # ¡Debe existir este Timer en la escena!
+@onready var sprite: Sprite2D = $Submarino
+
+# Pre-cargamos la escena del misil para poder instanciarla rápidamente
+const MISIL: PackedScene = preload("uid://beqg12lmsofl8")
+
 
 # ==============================================================================
 # SISTEMA DE NIVELACIÓN Y ESTADÍSTICAS
@@ -36,7 +49,6 @@ signal salud_cambiada(salud_nueva, salud_maxima)
 signal nivel_subido(nuevo_nivel)
 signal experiencia_ganada(cantidad)
 
-@onready var animated_sprite = $AnimatedSprite2D
 
 # ==============================================================================
 # FUNCIONES NATIVAS DE GODOT
@@ -53,6 +65,11 @@ func _physics_process(_delta) -> void:
 	direccion.x = Input.get_action_strength("derecha") - Input.get_action_strength("izquierda")
 	direccion.y = Input.get_action_strength("abajo") - Input.get_action_strength("arriba")
 	
+	if direccion.x > 0:
+		sprite.flip_h = false
+	elif direccion.x < 0:
+		sprite.flip_h = true
+		
 	direccion = direccion.normalized()
 	
 	# 2. Aplicar el movimiento base (control del jugador)
@@ -129,7 +146,46 @@ func subir_de_nivel() -> void:
 	print("¡Nivel subido a %d!" % nivel)
 
 # ==============================================================================
-# SISTEMA DE ATAQUE (Para sesión 4)
+# SISTEMA DE ATAQUE AUTOMÁTICO
 # ==============================================================================
-# La lógica del Timer para disparar misiles irá aquí.
-# Se usa 'fuerza_de_ataque' y 'velocidad_de_ataque' para controlar el proyectil.
+
+# Conectado a la señal 'timeout' del TimerAtaque
+func _on_timer_misil_timeout():
+	var enemigo_cercano: Enemigo = buscar_enemigo_cercano()
+	
+	if enemigo_cercano:
+		# Calcular la dirección hacia el enemigo
+		var direccion_de_disparo = global_position.direction_to(enemigo_cercano.global_position)
+		lanzar_misil_a_direccion(direccion_de_disparo)
+
+# Función principal para buscar el objetivo
+func buscar_enemigo_cercano() -> Enemigo:
+	var enemigos = get_tree().get_nodes_in_group("enemigos")
+	var enemigo_mas_cercano: Enemigo = null
+	var distancia_minima: float = radio_de_ataque * radio_de_ataque # Usamos distancia^2 para optimizar
+	
+	for enemigo in enemigos:
+		# Calculamos la distancia al cuadrado (es más rápido que calcular la raíz cuadrada)
+		var distancia_actual_cuadrada = global_position.distance_squared_to(enemigo.global_position)
+		
+		# Verificamos si es más cercano Y está dentro del radio de ataque
+		if distancia_actual_cuadrada < distancia_minima:
+			distancia_minima = distancia_actual_cuadrada
+			enemigo_mas_cercano = enemigo
+			
+	return enemigo_mas_cercano
+
+# Función para instanciar el proyectil y configurarlo
+func lanzar_misil_a_direccion(direccion_de_disparo: Vector2) -> void:
+	var nuevo_misil: Misil# = Misil.crear_misil(fuerza_de_ataque)
+	
+	# 1. Posicionamiento: Lanzamos el misil desde el centro del jugador
+	get_parent().add_child(nuevo_misil) # Lo añadimos al nodo principal (Mundo)
+	nuevo_misil.global_position = global_position
+	
+	# 2. Configuración: Le pasamos la dirección y el daño
+	nuevo_misil.direccion = direccion_de_disparo.normalized()
+	nuevo_misil.danio_a_infligir = fuerza_de_ataque
+	
+	# Aquí podrías rotar el sprite del misil para que apunte a la dirección
+	# nuevo_misil.rotation = direccion_de_disparo.angle()
