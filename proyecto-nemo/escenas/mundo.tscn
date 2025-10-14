@@ -36,8 +36,6 @@ offset_bottom = 5362.0
 texture = SubResource("GradientTexture2D_v0a8y")
 metadata/_edit_lock_ = true
 
-[node name="TileMapLayer" type="TileMapLayer" parent="FondoEscenario"]
-
 [node name="ContenedorJugador" type="Node2D" parent="."]
 position = Vector2(0, -1)
 
@@ -55,6 +53,7 @@ script = ExtResource("2_glrvs")
 enemigos = Array[PackedScene]([ExtResource("3_16hu1")])
 
 [node name="TimerSpawnEnemigo" type="Timer" parent="ContenedorEnemigos"]
+wait_time = 2.0149999999999997
 autostart = true
 
 [node name="ContenedorObjetos" type="Node2D" parent="."]
