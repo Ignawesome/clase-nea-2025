@@ -62,7 +62,7 @@ func recibir_danio(cantidad_de_danio: float):
 	# print("Enemigo golpeado, HP restante: %f" % salud_actual) # Mostrar en consola
 	
 	if salud_actual <= 0:
-		morir()
+		morir.call_deferred()
 
 # Se activa cuando el Hitbox del enemigo toca un CharacterBody2D
 func _on_hitbox_body_entered(body: Node2D):
@@ -74,7 +74,7 @@ func _on_hitbox_body_entered(body: Node2D):
 		
 		# Eliminamos al enemigo por contacto (como en Vampire Survivors)
 		# En una versión más avanzada, se podría usar un cooldown
-		morir() 
+		morir.call_deferred()
 
 # ==============================================================================
 # MUERTE Y RECOMPENSAS

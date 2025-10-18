@@ -19,10 +19,12 @@ height = 90.0
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_und4c")
+velocidad_de_movimiento = 175.0
+puntos_de_salud_maximos = 5.0
 
 [node name="Medusa" type="Sprite2D" parent="."]
 position = Vector2(-5.9604645e-08, 1.0000005)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.40740559, 0.39214587)
 texture = ExtResource("1_1umyg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -41,4 +43,5 @@ collision_layer = 32
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+scale = Vector2(0.9438928, 0.921093)
 shape = SubResource("CapsuleShape2D_augel")

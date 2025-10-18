@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://dac85i4tc4afg"]
+
+[ext_resource type="Texture2D" uid="uid://oy1yaj21gvr" path="res://assets/enemigos/medusa.png" id="1_1umyg"]
+[ext_resource type="Script" uid="uid://b3tmnagc2lm28" path="res://escenas/enemigos/enemigo.gd" id="1_und4c"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_und4c"]
+radius = 20.0
+height = 84.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1umyg"]
+radius = 20.0
+height = 60.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_augel"]
+radius = 28.0
+height = 90.0
+
+[node name="Medusa" type="CharacterBody2D" groups=["enemigos"]]
+collision_layer = 2
+collision_mask = 8
+script = ExtResource("1_und4c")
+
+[node name="Medusa" type="Sprite2D" parent="."]
+position = Vector2(-5.9604645e-08, 1.0000005)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_1umyg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_und4c")
+
+[node name="Hitbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 16
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_1umyg")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 32
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_augel")
