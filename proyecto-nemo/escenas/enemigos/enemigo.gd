@@ -9,6 +9,8 @@ extends CharacterBody2D
 @export var puntos_de_salud_maximos: float = 3.0    # Vida inicial del enemigo
 @export var danio_por_contacto: float = 1.0         # Daño que hace al tocar al jugador
 @export var recompensa_xp: float = 1.0              # Cantidad de XP que suelta al morir
+@export var probabilidad_orbe_hp: float = 0.333     # Chance de que suelte un orbe de HP
+@export var material_daño: ShaderMaterial = preload("uid://derpqkc1oebjk")
 
 # ==============================================================================
 # VARIABLES Y REFERENCIAS
@@ -27,7 +29,7 @@ var esta_muerto: bool = false
 # FUNCIONES NATIVAS DE GODOT
 # ==============================================================================
 
-func _ready():
+func _ready() -> void:
 	salud_actual = puntos_de_salud_maximos
 	
 	# Conectar la señal para detectar cuando el enemigo toca al jugador
@@ -35,7 +37,7 @@ func _ready():
 		hitbox.body_entered.connect(_on_hitbox_body_entered)
 
 
-func _physics_process(delta):
+func _physics_process(_delta) -> void:
 	# Si el enemigo está muerto o no encuentra al jugador, no hace nada
 	if esta_muerto or not objetivo:
 		return
@@ -59,10 +61,16 @@ func recibir_danio(cantidad_de_danio: float):
 		return
 		
 	salud_actual -= cantidad_de_danio
+	
+	material = material_daño
+	await get_tree().create_timer(0.25).timeout
+	material = null
+	
 	# print("Enemigo golpeado, HP restante: %f" % salud_actual) # Mostrar en consola
 	
 	if salud_actual <= 0:
 		morir.call_deferred()
+
 
 # Se activa cuando el Hitbox del enemigo toca un CharacterBody2D
 func _on_hitbox_body_entered(body: Node2D):
@@ -86,10 +94,40 @@ func morir():
 		
 	esta_muerto = true
 
-	# 1. Lógica para soltar el OrbeXP (implementar en Sesión 6)
-	var nueva_orbe: OrbeExperiencia = OrbeExperiencia.crear_orbe_xp(recompensa_xp)
-	Globales.contenedor_objetos.add_child(nueva_orbe)
-	nueva_orbe.global_position = global_position
+	# Genera un numero aleatorio entre 0 y 1 y chequea contra la probabilidad de orbe HP
+	var recupera_hp: bool
+	
+	if probabilidad_orbe_hp > randf():
+		recupera_hp = true
+	else:
+		recupera_hp = false
+	
+	if recupera_hp:
+		spawnear_orbe_hp()
+
+	spawnear_orbe_xp()
 
 	# 2. Eliminar el nodo de la escena
 	queue_free()
+
+
+func spawnear_orbe_xp():
+	var nueva_orbe: OrbeDrop = OrbeDrop.crear_orbe_xp(recompensa_xp)
+	Globales.contenedor_objetos.add_child(nueva_orbe)
+	nueva_orbe.global_position = global_position + Vector2(randf_range(-50, 50), randf_range(-50, 50))
+
+
+func spawnear_orbe_hp():
+	var nueva_orbe: OrbeDrop = OrbeDrop.crear_orbe_hp()
+	Globales.contenedor_objetos.add_child(nueva_orbe)
+	nueva_orbe.global_position = global_position + Vector2(randf_range(-50, 50), randf_range(-50, 50))
+
+
+func _on_deteccion_body_entered(body: Node2D) -> void:
+	if body is Jugador:
+		objetivo = body
+
+
+func _on_deteccion_body_exited(body: Node2D) -> void:
+	if body is Jugador:
+		objetivo = null

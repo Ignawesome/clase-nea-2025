@@ -1,41 +1,43 @@
-[gd_scene load_steps=7 format=3 uid="uid://dac85i4tc4afg"]
+[gd_scene load_steps=7 format=3 uid="uid://dp7xvsbtse7of"]
 
-[ext_resource type="Texture2D" uid="uid://oy1yaj21gvr" path="res://assets/enemigos/medusa.png" id="1_1umyg"]
-[ext_resource type="Script" uid="uid://b3tmnagc2lm28" path="res://escenas/enemigos/enemigo.gd" id="1_und4c"]
+[ext_resource type="Script" uid="uid://b3tmnagc2lm28" path="res://escenas/enemigos/enemigo.gd" id="1_iw2vs"]
+[ext_resource type="Texture2D" uid="uid://0pvdkbqfcg7l" path="res://assets/enemigos/tiburon.png" id="2_iw2vs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_und4c"]
-radius = 20.0
-height = 84.0
+radius = 32.0
+height = 148.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1umyg"]
 radius = 20.0
-height = 60.0
+height = 140.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_augel"]
 radius = 28.0
-height = 90.0
+height = 151.99335
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_und4c"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_iw2vs"]
 radius = 762.0026
 
-[node name="Medusa" type="CharacterBody2D" groups=["enemigos"]]
+[node name="Tiburon" type="CharacterBody2D" groups=["enemigos"]]
 collision_layer = 2
 collision_mask = 8
-script = ExtResource("1_und4c")
+script = ExtResource("1_iw2vs")
+velocidad_de_movimiento = 175.0
 puntos_de_salud_maximos = 5.0
 
-[node name="Medusa" type="Sprite2D" parent="."]
-position = Vector2(-5.9604645e-08, 1.0000005)
-scale = Vector2(0.40740559, 0.39214587)
-texture = ExtResource("1_1umyg")
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(13, -6.9999995)
+texture = ExtResource("2_iw2vs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
+rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_und4c")
 
 [node name="Hitbox" type="Area2D" parent="."]
 unique_name_in_owner = true
 visible = false
+rotation = -1.5707964
 collision_layer = 16
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
@@ -44,6 +46,7 @@ shape = SubResource("CapsuleShape2D_1umyg")
 [node name="Hurtbox" type="Area2D" parent="."]
 unique_name_in_owner = true
 visible = false
+rotation = -1.5707964
 collision_layer = 32
 collision_mask = 64
 
@@ -56,7 +59,7 @@ visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Deteccion"]
-shape = SubResource("CircleShape2D_und4c")
+shape = SubResource("CircleShape2D_iw2vs")
 
 [connection signal="body_entered" from="Deteccion" to="." method="_on_deteccion_body_entered"]
 [connection signal="body_exited" from="Deteccion" to="." method="_on_deteccion_body_exited"]

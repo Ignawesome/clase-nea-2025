@@ -1,12 +1,28 @@
-[gd_scene load_steps=11 format=3 uid="uid://6ls3aw75j8hu"]
+[gd_scene load_steps=31 format=4 uid="uid://6ls3aw75j8hu"]
 
 [ext_resource type="Script" uid="uid://cpo3lyut1s2y4" path="res://escenas/mundo.gd" id="1_4vydk"]
 [ext_resource type="PackedScene" uid="uid://j5rqe0nhurgb" path="res://escenas/jugador/jugador.tscn" id="1_cdbbl"]
 [ext_resource type="PackedScene" uid="uid://cynbnmilbcxqd" path="res://escenas/objetos/burbuja.tscn" id="2_6wjgb"]
-[ext_resource type="Script" uid="uid://dx7l18jqwhsm" path="res://scripts/contenedor_enemigos.gd" id="2_glrvs"]
+[ext_resource type="Shader" uid="uid://dugsq2hxe8w7q" path="res://scripts/ign_dither.gdshader" id="2_xulgr"]
 [ext_resource type="PackedScene" uid="uid://dac85i4tc4afg" path="res://escenas/enemigos/enemigo_medusa.tscn" id="3_16hu1"]
-[ext_resource type="PackedScene" uid="uid://ckga77yc4jw4q" path="res://escenas/enemigos/enemigo_narval.tscn" id="4_7oex1"]
 [ext_resource type="PackedScene" uid="uid://tnju06m5ruxw" path="res://escenas/interfaz/ranura_corazon.tscn" id="4_v12yk"]
+[ext_resource type="PackedScene" uid="uid://bdv3udc3phstm" path="res://escenas/peces/pez_azul.tscn" id="5_2q7jt"]
+[ext_resource type="PackedScene" uid="uid://bb551hfsg7rl8" path="res://escenas/peces/pez_globo.tscn" id="6_ry7fl"]
+[ext_resource type="Texture2D" uid="uid://catgqd77t86h2" path="res://assets/tiles/fishTilesheet@2.png" id="7_4vydk"]
+[ext_resource type="PackedScene" uid="uid://ba5eqm5uhltwx" path="res://escenas/peces/pez_naranja.tscn" id="7_kxf8l"]
+[ext_resource type="PackedScene" uid="uid://g6liha7h6ak1" path="res://escenas/peces/pez_rojo.tscn" id="8_t2cpl"]
+[ext_resource type="PackedScene" uid="uid://81x8wmwav84k" path="res://escenas/peces/pez_verde.tscn" id="8_txhqv"]
+[ext_resource type="PackedScene" uid="uid://jei5pe1ab7wc" path="res://escenas/peces/pez_rosa.tscn" id="9_xulgr"]
+[ext_resource type="PackedScene" uid="uid://8jgqtw0oa11" path="res://escenas/peces/pez_anguila.tscn" id="10_5bxjq"]
+[ext_resource type="PackedScene" uid="uid://c7ry5o7sw76h6" path="res://escenas/enemigos/enemigo_kraken.tscn" id="14_xulgr"]
+[ext_resource type="PackedScene" uid="uid://df3ooun8dkr8m" path="res://escenas/enemigos/enemigo_narval.tscn" id="15_5bxjq"]
+[ext_resource type="Script" uid="uid://bmtn1254p4yj5" path="res://escenas/capa_pausa.gd" id="15_ry7fl"]
+[ext_resource type="PackedScene" uid="uid://dp7xvsbtse7of" path="res://escenas/enemigos/enemigo_tiburon.tscn" id="16_kpmgh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xulgr"]
+shader = ExtResource("2_xulgr")
+shader_parameter/mode = 0
+shader_parameter/intensity = 0.01
 
 [sub_resource type="Gradient" id="Gradient_dayui"]
 offsets = PackedFloat32Array(0, 0.18, 0.4, 0.75333333, 0.9, 1)
@@ -18,12 +34,266 @@ width = 24
 height = 24
 fill_from = Vector2(1, 1)
 
+[sub_resource type="TileMapPattern" id="TileMapPattern_mb57o"]
+tile_data = PackedInt32Array(0, 393216, 1, 65536, 65536, 1, 1, 196608, 1, 65537, 65536, 0, 2, 131072, 1, 65538, 0, 1)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_txhqv"]
+tile_data = PackedInt32Array(0, 1, 131072, 65536, 1, 131072, 1, 1, 131072, 65537, 1, 131072, 2, 1, 131072, 65538, 1, 131072)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4vydk"]
+resource_name = "Mar"
+texture = ExtResource("7_4vydk")
+texture_region_size = Vector2i(128, 128)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+9:0/0 = 0
+9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+10:0/0 = 0
+10:0/0/texture_origin = Vector2i(0, -20)
+11:0/0 = 0
+11:0/0/texture_origin = Vector2i(0, -20)
+12:0/0 = 0
+12:0/0/texture_origin = Vector2i(0, -20)
+13:0/0 = 0
+13:0/0/texture_origin = Vector2i(0, -20)
+14:0/0 = 0
+14:0/0/texture_origin = Vector2i(0, -20)
+15:0/0 = 0
+15:0/0/texture_origin = Vector2i(0, -20)
+16:0/0 = 0
+16:0/0/texture_origin = Vector2i(0, -20)
+17:0/0 = 0
+17:0/0/texture_origin = Vector2i(0, -20)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+8:1/0 = 0
+8:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+9:1/0 = 0
+9:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+10:1/0 = 0
+10:1/0/texture_origin = Vector2i(0, -20)
+11:1/0 = 0
+11:1/0/texture_origin = Vector2i(0, -20)
+12:1/0 = 0
+12:1/0/texture_origin = Vector2i(0, -20)
+13:1/0 = 0
+13:1/0/texture_origin = Vector2i(0, -20)
+14:1/0 = 0
+14:1/0/texture_origin = Vector2i(0, -20)
+15:1/0 = 0
+15:1/0/texture_origin = Vector2i(0, -20)
+16:1/0 = 0
+16:1/0/texture_origin = Vector2i(0, -20)
+17:1/0 = 0
+17:1/0/texture_origin = Vector2i(0, -20)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+7:2/0 = 0
+7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+8:2/0 = 0
+8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+9:2/0 = 0
+9:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+10:2/0 = 0
+10:2/0/texture_origin = Vector2i(0, -20)
+11:2/0 = 0
+11:2/0/texture_origin = Vector2i(0, -20)
+12:2/0 = 0
+12:2/0/texture_origin = Vector2i(0, -20)
+13:2/0 = 0
+13:2/0/texture_origin = Vector2i(0, -20)
+14:2/0 = 0
+14:2/0/texture_origin = Vector2i(0, -20)
+15:2/0 = 0
+15:2/0/texture_origin = Vector2i(0, -20)
+16:2/0 = 0
+16:2/0/texture_origin = Vector2i(0, -20)
+17:2/0 = 0
+17:2/0/texture_origin = Vector2i(0, -20)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+4:3/0 = 0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+6:3/0 = 0
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+7:3/0 = 0
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+8:3/0 = 0
+8:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+9:3/0 = 0
+9:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+10:3/0 = 0
+10:3/0/texture_origin = Vector2i(0, -20)
+11:3/0 = 0
+11:3/0/texture_origin = Vector2i(0, -20)
+12:3/0 = 0
+12:3/0/texture_origin = Vector2i(0, -20)
+13:3/0 = 0
+13:3/0/texture_origin = Vector2i(0, -20)
+14:3/0 = 0
+14:3/0/texture_origin = Vector2i(0, -20)
+15:3/0 = 0
+15:3/0/texture_origin = Vector2i(0, -20)
+16:3/0 = 0
+16:3/0/texture_origin = Vector2i(0, -20)
+17:3/0 = 0
+17:3/0/texture_origin = Vector2i(0, -20)
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+10:4/0/texture_origin = Vector2i(0, -16)
+11:4/0 = 0
+11:4/0/texture_origin = Vector2i(0, -16)
+12:4/0 = 0
+12:4/0/texture_origin = Vector2i(0, -16)
+13:4/0 = 0
+13:4/0/texture_origin = Vector2i(0, -16)
+14:4/0 = 0
+14:4/0/texture_origin = Vector2i(0, -16)
+15:4/0 = 0
+15:4/0/texture_origin = Vector2i(0, -16)
+16:4/0 = 0
+16:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+17:4/0 = 0
+17:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_jcqeh"]
+resource_name = "MarEscenas"
+scenes/1/scene = ExtResource("2_6wjgb")
+scenes/2/scene = ExtResource("8_txhqv")
+scenes/3/scene = ExtResource("5_2q7jt")
+scenes/4/scene = ExtResource("6_ry7fl")
+scenes/5/scene = ExtResource("7_kxf8l")
+scenes/6/scene = ExtResource("8_t2cpl")
+scenes/7/scene = ExtResource("9_xulgr")
+scenes/8/scene = ExtResource("10_5bxjq")
+scenes/9/scene = ExtResource("14_xulgr")
+scenes/10/scene = ExtResource("3_16hu1")
+scenes/11/scene = ExtResource("15_5bxjq")
+scenes/12/scene = ExtResource("16_kpmgh")
+
+[sub_resource type="TileSet" id="TileSet_txhqv"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_4vydk")
+sources/1 = SubResource("TileSetScenesCollectionSource_jcqeh")
+pattern_0 = SubResource("TileMapPattern_mb57o")
+pattern_1 = SubResource("TileMapPattern_txhqv")
+
 [sub_resource type="GDScript" id="GDScript_16hu1"]
 script/source = "extends Node2D
 
 func _ready() -> void:
 	Globales.contenedor_objetos = self
 "
+
+[sub_resource type="Gradient" id="Gradient_2q7jt"]
+offsets = PackedFloat32Array(0.21022727, 1)
+colors = PackedColorArray(0.4, 0.23137255, 0.19607843, 0.76862746, 0.21176471, 0.09803922, 0.039215688, 0.83137256)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ry7fl"]
+gradient = SubResource("Gradient_2q7jt")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kxf8l"]
+font_size = 106
+outline_size = 29
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Mundo" type="Node"]
 script = ExtResource("1_4vydk")
@@ -32,12 +302,19 @@ script = ExtResource("1_4vydk")
 position = Vector2(0, 6)
 
 [node name="TextureRect" type="TextureRect" parent="FondoEscenario"]
+material = SubResource("ShaderMaterial_xulgr")
 offset_left = -10081.0
 offset_top = -5423.0
 offset_right = 10129.0
 offset_bottom = 5362.0
 texture = SubResource("GradientTexture2D_v0a8y")
 metadata/_edit_lock_ = true
+
+[node name="Terreno" type="TileMapLayer" parent="."]
+position = Vector2(1, 0)
+tile_map_data = PackedByteArray("AAAJAP3/AQAAAAAACQAKAP3/AQAAAAAACgAMAP3/AQAAAAAACwANAP3/AQAAAAAADACx/ykAAAACAAIAAACy/ykAAAADAAIAAACz/ykAAAAEAAIAAAC0/ykAAAAFAAIAAAC1/ykAAAAGAAIAAAC2/ykAAAAHAAIAAAC3/ykAAAAIAAIAAAC4/ykAAAAJAAIAAAC5/ykAAAACAAIAAAC6/ykAAAADAAIAAAC7/ykAAAAEAAIAAAC8/ykAAAAFAAIAAAC9/ykAAAAGAAIAAAC+/ykAAAAHAAIAAAC//ykAAAAIAAIAAADA/ykAAAAJAAIAAADB/ykAAAACAAIAAADC/ykAAAADAAIAAADD/ykAAAAEAAIAAADE/ykAAAAFAAIAAADF/ykAAAAGAAIAAADG/ykAAAAHAAIAAADH/ykAAAAIAAIAAADI/ykAAAAJAAIAAADJ/ykAAAACAAIAAADK/ykAAAADAAIAAADL/ykAAAAEAAIAAADM/ykAAAAFAAIAAADN/ykAAAAGAAIAAADO/ykAAAAHAAIAAADP/ykAAAAIAAIAAADQ/ykAAAAJAAIAAADR/ykAAAACAAIAAADS/ykAAAADAAIAAADT/ykAAAAEAAIAAADU/ykAAAAFAAIAAADV/ykAAAAGAAIAAADW/ykAAAAHAAIAAADX/ykAAAAIAAIAAADY/ykAAAAJAAIAAADZ/ykAAAACAAIAAADa/ykAAAADAAIAAADb/ykAAAAEAAIAAADc/ykAAAAFAAIAAADd/ykAAAAGAAIAAADe/ykAAAAHAAIAAADf/ykAAAAIAAIAAADg/ykAAAAJAAIAAADh/ykAAAACAAIAAADi/ykAAAADAAIAAADj/ykAAAAEAAIAAADk/ykAAAAFAAIAAADl/ykAAAAGAAIAAADm/ykAAAAHAAIAAADn/ykAAAAIAAIAAADo/ykAAAAJAAIAAADp/ykAAAACAAIAAADq/ykAAAADAAIAAADr/ykAAAAEAAIAAADs/ykAAAAFAAIAAADt/ykAAAAGAAIAAADu/ykAAAAHAAIAAADv/ykAAAAIAAIAAADw/ykAAAAJAAIAAADx/ykAAAACAAIAAADy/ykAAAADAAIAAADz/ykAAAAEAAIAAAD0/ykAAAAFAAIAAAD1/ykAAAAGAAIAAAD2/ykAAAAHAAIAAAD3/ykAAAAIAAIAAAD4/ykAAAAJAAIAAAD5/ykAAAACAAIAAAD6/ykAAAADAAIAAAD7/ykAAAAEAAIAAAD8/ykAAAAFAAIAAAD9/ykAAAAGAAIAAAD+/ykAAAAHAAIAAAD//ykAAAAIAAIAAAAAACkAAAAJAAIAAAABACkAAAACAAIAAAACACkAAAADAAIAAAADACkAAAAEAAIAAAAEACkAAAAFAAIAAAAFACkAAAAGAAIAAAAGACkAAAAHAAIAAAAHACkAAAAIAAIAAAAIACkAAAAJAAIAAAAJACkAAAACAAIAAAAKACkAAAADAAIAAAALACkAAAAEAAIAAAAMACkAAAAFAAIAAAANACkAAAAGAAIAAAAOACkAAAAHAAIAAAAPACkAAAAIAAIAAAAQACkAAAAJAAIAAAARACkAAAACAAIAAAASACkAAAADAAIAAAATACkAAAAEAAIAAAAUACkAAAAFAAIAAAAVACkAAAAGAAIAAAAWACkAAAAHAAIAAAAXACkAAAAIAAIAAAAYACkAAAAJAAIAAAAZACkAAAACAAIAAAAaACkAAAADAAIAAAAbACkAAAAEAAIAAAAcACkAAAAFAAIAAAAdACkAAAAGAAIAAAAeACkAAAAHAAIAAAAfACkAAAAIAAIAAAAgACkAAAAJAAIAAAAhACkAAAACAAIAAAAiACkAAAADAAIAAAAjACkAAAAEAAIAAAAkACkAAAAFAAIAAAAlACkAAAAGAAIAAAAmACkAAAAHAAIAAAAnACkAAAAIAAIAAAAoACkAAAAJAAIAAAApACkAAAACAAIAAAAqACkAAAADAAIAAAArACkAAAAEAAIAAAAsACkAAAAFAAIAAAAtACkAAAAGAAIAAAAuACkAAAAHAAIAAAAvACkAAAAIAAIAAAAwACkAAAAJAAIAAAAxACkAAAACAAIAAAAyACkAAAADAAIAAAAzACkAAAAEAAIAAAA0ACkAAAAFAAIAAAA1ACkAAAAGAAIAAAA2ACkAAAAHAAIAAAA3ACkAAAAIAAIAAAA4ACkAAAAJAAIAAAA5ACkAAAACAAIAAAA6ACkAAAADAAIAAAA7ACkAAAAEAAIAAAA8ACkAAAAFAAIAAAA9ACkAAAAGAAIAAAA+ACkAAAAHAAIAAAA/ACkAAAAIAAIAAABAACkAAAAJAAIAAABBACkAAAACAAIAAABCACkAAAADAAIAAABDACkAAAAEAAIAAABEACkAAAAFAAIAAABFACkAAAAGAAIAAABGACkAAAAHAAIAAABHACkAAAAIAAIAAABIACkAAAAJAAIAAABJACkAAAACAAIAAABKACkAAAADAAIAAABLACkAAAAEAAIAAABMACkAAAAFAAIAAABNACkAAAAGAAIAAABOACkAAAAHAAIAAABPACkAAAAIAAIAAABQACkAAAAJAAIAAABNACgAAAAKAAEAAABIACgAAAAKAAEAAAC3/ygAAAAKAAEAAADG/ygAAAAKAAEAAADY/ygAAAAKAAEAAADn/ygAAAAKAAEAAAD3/ygAAAAKAAEAAAAGACgAAAAKAAEAAAARACgAAAAKAAEAAAAfACgAAAAKAAEAAAArACgAAAAKAAEAAAA7ACgAAAAKAAEAAAA1ACgAAAAMAAAAAAAlACgAAAAMAAAAAAAUACgAAAAMAAAAAAAJACgAAAAMAAAAAAD7/ygAAAAMAAAAAADv/ygAAAAMAAAAAADg/ygAAAAMAAAAAABGACgAAAAPAAQAAAAyACgAAAAMAAQAAAAjACgAAAAMAAQAAAAXACgAAAAMAAQAAAAWACgAAAAMAAQAAAACACgAAAAMAAQAAADz/ygAAAAMAAQAAADq/ygAAAAMAAQAAADb/ygAAAAMAAQAAADP/ygAAAAMAAQAAAC6/ygAAAAMAAQAAADA/ygAAAAKAAQAAAAcACgAAAAKAAQAAAAuACgAAAAKAAQAAAA=")
+tile_set = SubResource("TileSet_txhqv")
+navigation_enabled = false
 
 [node name="ContenedorJugador" type="Node2D" parent="."]
 position = Vector2(0, -1)
@@ -51,194 +328,18 @@ limit_right = 10103
 limit_bottom = 5329
 limit_smoothed = true
 
-[node name="ContenedorEnemigos" type="Node2D" parent="."]
-script = ExtResource("2_glrvs")
-enemigos = Array[PackedScene]([ExtResource("3_16hu1"), ExtResource("4_7oex1")])
-
-[node name="TimerSpawnEnemigo" type="Timer" parent="ContenedorEnemigos"]
-wait_time = 2.0149999999999997
-autostart = true
-
 [node name="ContenedorObjetos" type="Node2D" parent="."]
 
 [node name="ContenedorBurbujas" type="Node2D" parent="ContenedorObjetos"]
-
-[node name="Burbujas" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(-293, 210)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
-
-[node name="Burbujas2" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(425, 410)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas2" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas2" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas2" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas2" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
-
-[node name="Burbujas3" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(-1477, 699)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas3" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas3" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas3" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas3" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
-
-[node name="Burbujas4" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(1757, 640)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas4" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas4" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas4" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas4" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
-
-[node name="Burbujas5" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(2608, 766)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas5" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas5" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas5" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas5" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
-
-[node name="Burbujas6" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(-2742, 662)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas6" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas6" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas6" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas6" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
-
-[node name="Burbujas7" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(-1025, 151)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas7" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas7" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas7" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas7" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
-
-[node name="Burbujas8" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(-2350, 62)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas8" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas8" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas8" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas8" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
-
-[node name="Burbujas9" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(2941, 232)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas9" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas9" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas9" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas9" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
-
-[node name="Burbujas10" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(1357, 180)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas10" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas10" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas10" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas10" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
-
-[node name="Burbujas11" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(891, 1120)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas11" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas11" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas11" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas11" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
-
-[node name="Burbujas12" type="Node2D" parent="ContenedorObjetos/ContenedorBurbujas"]
-position = Vector2(-27, 994)
-
-[node name="Burbuja" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas12" instance=ExtResource("2_6wjgb")]
-position = Vector2(-73, 40)
-
-[node name="Burbuja2" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas12" instance=ExtResource("2_6wjgb")]
-position = Vector2(90, -63)
-
-[node name="Burbuja3" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas12" instance=ExtResource("2_6wjgb")]
-
-[node name="Burbuja4" parent="ContenedorObjetos/ContenedorBurbujas/Burbujas12" instance=ExtResource("2_6wjgb")]
-position = Vector2(-98, -53)
 
 [node name="ContenedorXP" type="Node2D" parent="ContenedorObjetos"]
 script = SubResource("GDScript_16hu1")
 
 [node name="FrenteEscenario" type="Node2D" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CapaInterfaz" type="CanvasLayer" parent="."]
 
-[node name="Interfaz" type="Control" parent="CanvasLayer"]
+[node name="Interfaz" type="Control" parent="CapaInterfaz"]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -248,39 +349,52 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="ContenedorHP" type="HBoxContainer" parent="CanvasLayer/Interfaz"]
+[node name="ContenedorHP" type="HBoxContainer" parent="CapaInterfaz/Interfaz"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
-[node name="RanuraCorazon" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
+[node name="RanuraCorazon" parent="CapaInterfaz/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
 layout_mode = 2
 
-[node name="RanuraCorazon2" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
+[node name="RanuraCorazon2" parent="CapaInterfaz/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
 layout_mode = 2
 
-[node name="RanuraCorazon3" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
+[node name="RanuraCorazon3" parent="CapaInterfaz/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
 layout_mode = 2
 
-[node name="RanuraCorazon4" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
+[node name="RanuraCorazon4" parent="CapaInterfaz/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
 layout_mode = 2
 
-[node name="RanuraCorazon5" parent="CanvasLayer/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
+[node name="RanuraCorazon5" parent="CapaInterfaz/Interfaz/ContenedorHP" instance=ExtResource("4_v12yk")]
 layout_mode = 2
 
-[node name="Pausa" type="CanvasLayer" parent="."]
+[node name="CapaPausa" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("15_ry7fl")
 
-[node name="Interfaz" type="Control" parent="Pausa"]
-texture_filter = 1
-layout_mode = 3
+[node name="TextureRect" type="TextureRect" parent="CapaPausa"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
+texture = SubResource("GradientTexture2D_ry7fl")
 
-[node name="ColorRect" type="ColorRect" parent="Pausa"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Label" type="Label" parent="CapaPausa"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -11.5
+offset_right = 26.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "PAUSA"
+label_settings = SubResource("LabelSettings_kxf8l")

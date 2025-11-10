@@ -20,6 +20,8 @@ var danio_a_infligir: float = 1.0
 var direccion: Vector2 = Vector2.RIGHT
 
 @onready var tiempo_de_vida = $TiempoDeVida # Debe ser un nodo Timer hijo
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sonido_explosion: AudioStreamPlayer2D = $SonidoExplosion
 
 
 # ==============================================================================
@@ -68,8 +70,9 @@ func _on_body_entered(body: Node2D):
 		# 1. Aplicar daño al enemigo
 		enemigo_golpeado.recibir_danio(danio_a_infligir)
 		
-		# 2. Destruir el misil (ya cumplió su propósito)
-		queue_free()
+		# 2. Reproducir animacion de explosion
+		sonido_explosion.pitch_scale = sonido_explosion.pitch_scale + randf_range(-0.2, 0.2)
+		animation_player.play("explotar")
 		
 	# Importante: Si golpea otros cuerpos (como rocas o corales, que son StaticBody2D)
 	# el misil simplemente debe atravesarlos, o bien podrías agregar aquí un "queue_free()"

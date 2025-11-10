@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkmeox5n8r0w"]
+[gd_scene load_steps=6 format=3 uid="uid://bl3kjd4s4bdak"]
 
-[ext_resource type="Script" uid="uid://cl6dtytq0x626" path="res://escenas/objetos/orbe_experiencia.gd" id="1_v3ik0"]
-[ext_resource type="AudioStream" uid="uid://cj0pcxwshf0pb" path="res://assets/audio/sfx/xp_orb.wav" id="2_67qe2"]
+[ext_resource type="Script" uid="uid://cl6dtytq0x626" path="res://escenas/objetos/orbe_experiencia.gd" id="1_twc5k"]
+[ext_resource type="AudioStream" uid="uid://cj0pcxwshf0pb" path="res://assets/audio/sfx/xp_orb.wav" id="2_73yl4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5nfbb"]
 
@@ -15,20 +15,20 @@ gradient = SubResource("Gradient_5nfbb")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="OrbeExperiencia" type="Area2D"]
+[node name="OrbeHP" type="Area2D"]
 collision_layer = 4
-script = ExtResource("1_v3ik0")
-cantidad_de_hp = 0.0
+script = ExtResource("1_twc5k")
+cantidad_de_experiencia = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5nfbb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.5882353, 0.36862746, 1)
+modulate = Color(0.9807916, 0.51049894, 0.89912295, 1)
 scale = Vector2(0.595, 0.595)
 texture = SubResource("GradientTexture2D_v3ik0")
 
 [node name="SonidoPickup" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_67qe2")
+stream = ExtResource("2_73yl4")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

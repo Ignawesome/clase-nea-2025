@@ -18,10 +18,14 @@ extends CharacterBody2D
 # Defensa
 @export var puntos_de_salud_maximos := 5         ## Vida máxima del personaje
 @export var probabilidad_de_esquiva: float = 0.05  ## Probabilidad de no recibir daño (5%)
+@export var material_daño: ShaderMaterial
 
 # ==============================================================================
 # REFERENCIAS Y PRECARGAS
 # ==============================================================================
+@onready var sonido_disparo: AudioStreamPlayer2D = $SonidoDisparo
+@onready var sonido_dañado: AudioStreamPlayer2D = $SonidoDañado
+@onready var sonido_level_up: AudioStreamPlayer2D = $SonidoLevelUp
 
 @onready var timer_misil: Timer = $TimerMisil # ¡Debe existir este Timer en la escena!
 @onready var sprite: Sprite2D = $Submarino
@@ -45,14 +49,18 @@ var experiencia_para_subir: float = 10.0 # Cantidad de XP necesaria para Nivel 2
 var salud_actual: float: set = al_cambiar_de_salud
 
 signal derrotado 
+
 signal salud_cambiada(salud_nueva, salud_maxima)
+
 signal nivel_subido(nuevo_nivel)
+
 signal experiencia_ganada(cantidad)
 
 
 # ==============================================================================
 # FUNCIONES NATIVAS DE GODOT
 # ==============================================================================
+
 
 func _ready():
 	# Inicializar la salud
@@ -76,6 +84,8 @@ func _physics_process(_delta) -> void:
 		sprite.flip_h = false
 	elif direccion.x < 0:
 		sprite.flip_h = true
+	else:
+		pass
 		
 	direccion = direccion.normalized()
 	
@@ -104,8 +114,12 @@ func al_cambiar_de_salud(nueva_salud: float) -> void:
 	salud_cambiada.emit(salud_actual, puntos_de_salud_maximos)
 	
 	if salud_actual <= 0:
-		derrotado.emit()
-		queue_free()
+		morir()
+
+
+func morir():
+	derrotado.emit()
+	get_tree().reload_current_scene.call_deferred()
 
 
 func recibir_danio(cantidad_de_danio: float) -> void:
@@ -120,6 +134,12 @@ func recibir_danio(cantidad_de_danio: float) -> void:
 		
 	# Aplicar daño si no se esquiva
 	salud_actual -= cantidad_de_danio
+	sonido_dañado.pitch_scale = sonido_dañado.pitch_scale + randf_range(-0.2, 0.2)
+	sonido_dañado.play()
+	material = material_daño
+	await get_tree().create_timer(0.25).timeout
+	material = null
+	
 	# Aquí se puede agregar lógica de feedback visual (parpadeo)
 
 # ==============================================================================
@@ -138,6 +158,7 @@ func subir_de_nivel() -> void:
 	# Ajustar XP restante y aumentar nivel
 	experiencia_actual -= experiencia_para_subir
 	nivel += 1
+	sonido_level_up.play()
 	
 	# Aumentar la XP necesaria para el próximo nivel (ej: 10% más difícil)
 	experiencia_para_subir *= 1.1 
@@ -188,6 +209,7 @@ func buscar_enemigo_cercano() -> Enemigo:
 func lanzar_misil_a_direccion(direccion_de_disparo: Vector2) -> void:
 	var nuevo_misil: Misil = Misil.crear_misil(duración_de_misil, fuerza_de_ataque)
 	
+	
 	# 1. Posicionamiento: Lanzamos el misil desde el centro del jugador
 	get_parent().add_child(nuevo_misil) # Lo añadimos al nodo principal (Mundo)
 	nuevo_misil.global_position = global_position
@@ -195,6 +217,7 @@ func lanzar_misil_a_direccion(direccion_de_disparo: Vector2) -> void:
 	# 2. Configuración: Le pasamos la dirección y el daño
 	nuevo_misil.direccion = direccion_de_disparo.normalized()
 	nuevo_misil.danio_a_infligir = fuerza_de_ataque
+	sonido_disparo.play()
 	
 	# Aquí podrías rotar el sprite del misil para que apunte a la dirección
 	# nuevo_misil.rotation = direccion_de_disparo.angle()

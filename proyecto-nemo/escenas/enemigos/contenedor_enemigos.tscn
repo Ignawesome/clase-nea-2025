@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://ct3ni84jfra4u"]
+
+[ext_resource type="Script" uid="uid://dx7l18jqwhsm" path="res://scripts/contenedor_enemigos.gd" id="1_kq2r1"]
+[ext_resource type="PackedScene" uid="uid://dac85i4tc4afg" path="res://escenas/enemigos/enemigo_medusa.tscn" id="2_8oidu"]
+[ext_resource type="PackedScene" uid="uid://c7ry5o7sw76h6" path="res://escenas/enemigos/enemigo_kraken.tscn" id="3_ei7xa"]
+[ext_resource type="PackedScene" uid="uid://df3ooun8dkr8m" path="res://escenas/enemigos/enemigo_narval.tscn" id="4_jjq8q"]
+[ext_resource type="PackedScene" uid="uid://dp7xvsbtse7of" path="res://escenas/enemigos/enemigo_tiburon.tscn" id="5_6gor7"]
+
+[node name="ContenedorEnemigos" type="Node2D"]
+script = ExtResource("1_kq2r1")
+enemigos = Array[PackedScene]([ExtResource("2_8oidu"), ExtResource("3_ei7xa"), ExtResource("4_jjq8q"), ExtResource("5_6gor7")])
+tiempo_aumento_enemigos = 60
+
+[node name="TimerSpawnEnemigo" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="TimerTasaEnemigos" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
